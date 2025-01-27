@@ -141,7 +141,7 @@ function App() {
             index: currentObstacleIndex,
             image: ENEMY_IMAGES[currentObstacleIndex]
           });
-          setObstacleCount(prev => prev + 0.5);
+          setObstacleCount(prev => prev + 1);
         }
 
         const collision = updatedObs.some(obs => 
