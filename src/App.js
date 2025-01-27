@@ -110,11 +110,13 @@ function App() {
     const gameInterval = setInterval(() => {
       setObstacles(prevObs => {
         const updatedObs = prevObs
-          .map(obs => ({ ...obs, position: obs.position - 8 }))
+          .map(obs => ({ ...obs, position: obs.position - 8 })) 
           .filter(obs => {
-            // Check if obstacle has been defeated
+            // Check if obstacle has been defeated or moved off screen
             if (obs.position <= -50) {
-              setDefeatedObstacles(prev => [...prev, obs.index]);
+              setDefeatedObstacles(prev => 
+                prev.includes(obs.index) ? prev : [...prev, obs.index]
+              );
               return false;
             }
             return true;
@@ -122,7 +124,12 @@ function App() {
 
         // Spawn obstacles at specific percentages with a more explicit check
         const currentObstacleIndex = Math.floor(obstacleCount);
+        const isObstacleAlreadySpawned = prevObs.some(
+          obs => obs.index === currentObstacleIndex
+        );
+
         if (
+          !isObstacleAlreadySpawned &&
           currentObstacleIndex < OBSTACLE_SPAWN_POINTS.length && 
           score >= OBSTACLE_SPAWN_POINTS[currentObstacleIndex]
         ) {
@@ -150,7 +157,7 @@ function App() {
 
         return updatedObs;
       });
-    }, 20);
+    }, 20); 
 
     return () => clearInterval(gameInterval);
   }, [isPlaying, score, llamaPosition, obstacleCount]);

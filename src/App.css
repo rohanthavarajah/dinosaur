@@ -149,3 +149,9 @@
   text-decoration: line-through;
   opacity: 0.6;
 }
+
+.obstacle {
+  position: absolute;
+  transition: transform 0.03s linear;
+  will-change: transform;
+}
