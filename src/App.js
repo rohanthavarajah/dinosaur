@@ -120,15 +120,19 @@ function App() {
             return true;
           });
 
-        // Spawn obstacles at specific percentages
-        if (score >= OBSTACLE_SPAWN_POINTS[obstacleCount]) {
-          console.log(`Spawning obstacle ${obstacleCount + 1} at score ${Math.floor(score)}%`);
+        // Spawn obstacles at specific percentages with a more explicit check
+        const currentObstacleIndex = Math.floor(obstacleCount);
+        if (
+          currentObstacleIndex < OBSTACLE_SPAWN_POINTS.length && 
+          score >= OBSTACLE_SPAWN_POINTS[currentObstacleIndex]
+        ) {
+          console.log(`Spawning obstacle ${currentObstacleIndex + 1} at score ${Math.floor(score)}%`);
           updatedObs.push({ 
             position: 800, 
             id: Date.now(),
             height: 80,
-            index: obstacleCount,
-            image: ENEMY_IMAGES[obstacleCount]
+            index: currentObstacleIndex,
+            image: ENEMY_IMAGES[currentObstacleIndex]
           });
           setObstacleCount(prev => prev + 0.5);
         }

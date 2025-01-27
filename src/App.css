@@ -131,7 +131,6 @@
 
 .obstacle-list {
   position: absolute;
-  /* left: 20px; */
   right: 20px;
   top: 60px;
   z-index: 10;
