@@ -110,7 +110,7 @@ function App() {
     const gameInterval = setInterval(() => {
       setObstacles(prevObs => {
         const updatedObs = prevObs
-          .map(obs => ({ ...obs, position: obs.position - 8 })) 
+          .map(obs => ({ ...obs, position: obs.position - 4 })) 
           .filter(obs => {
             // Check if obstacle has been defeated or moved off screen
             if (obs.position <= -50) {
@@ -157,7 +157,7 @@ function App() {
 
         return updatedObs;
       });
-    }, 20); 
+    }, 10); 
 
     return () => clearInterval(gameInterval);
   }, [isPlaying, score, llamaPosition, obstacleCount]);
